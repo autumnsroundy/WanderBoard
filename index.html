@@ -35,6 +35,27 @@
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-    <script src="app.js"></script>
+    <script type="module" src="js/main.js"></script>
+
+    <!-- Postcard Modal -->
+    <div id="postcardModal" class="modal hidden">
+        <div class="modal-content">
+            <button id="closeModal" class="close-btn">✕</button>
+
+            <h2>Edit Postcard</h2>
+
+            <label>Title</label>
+            <input type="text" id="pcTitle" />
+
+            <label>Notes</label>
+            <textarea id="pcNotes"></textarea>
+
+            <label>Image</label>
+            <input type="file" id="pcImage" accept="image/*" />
+            <img id="pcPreview" class="image-preview hidden"/>
+
+            <button id="savePostcard" class="save-btn">Save Postcard</button>
+        </div>
+    </div>
 </body>
 </html>

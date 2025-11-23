@@ -46,3 +46,61 @@ nav button:hover {
 .hidden {
     display: none;
 }
+
+/* Modal backdrop */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Modal box */
+.modal-content {
+  background: #F8EBD8; /* sand beige */
+  padding: 20px;
+  width: 320px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  font-family: "Inter", sans-serif;
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.save-btn {
+  background: #2A9D8F; /* forest green */
+  border: none;
+  padding: 10px;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.save-btn:hover {
+  background: #21867a;
+}
+
+.image-preview {
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 10px;
+}
