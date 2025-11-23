@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #F8EBD8;
+    color: #264653;
+}
+
+header {
+    background: #C44536;
+    color: white;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+header h1 {
+    font-family: Georgia, serif;
+}
+
+nav button {
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    background: #264653;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+nav button.active {
+    background: #2A9D8F;
+}
+
+nav button:hover {
+    background: #2A9D8F;
+}
+
+#map {
+    height: calc(100vh - 90px);
+    width: 100%;
+}
+
+.hidden {
+    display: none;
+}

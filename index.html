@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WanderBoard — Digital Postcard Map</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>WanderBoard</h1>
+        <nav>
+            <button id="viewMapBtn" class="active">Map</button>
+            <button id="viewGalleryBtn">Gallery</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- MAP VIEW -->
+        <section id="mapView">
+            <div id="map"></div>
+        </section>
+
+        <!-- GALLERY VIEW (empty for now) -->
+        <section id="galleryView" class="hidden">
+            <h2>Postcard Gallery (coming soon)</h2>
+            <div id="postcardList"></div>
+        </section>
+    </main>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script src="app.js"></script>
+</body>
+</html>
