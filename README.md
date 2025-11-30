@@ -4,9 +4,7 @@ WanderBoard is an interactive web application that lets users drop pins anywhere
 All data is saved automatically using localStorage, creating a personal travel journal that persists across browser sessions.
 This project was built for WDD II and demonstrates state management, multi-view UI design, map rendering, and interactive user input.
 
-**🌟 Features (Planned + Completed)**
-
-**✅ Current Features**
+**🌟 Features**
 - Interactive world map built with Leaflet.js
 - Drop pins by clicking anywhere on the map
 - Pins save automatically to localStorage
@@ -18,7 +16,8 @@ This project was built for WDD II and demonstrates state management, multi-view 
 - Navigation between Map and Gallery with active styling
 - Warm, scrapbook-inspired theme + responsive layout
 
-**🎯 Purpose**
+**🎯Purpose**
+
 WanderBoard allows users to visually document places they’ve traveled by attaching memories directly to locations on a world map.
 Instead of a standard photo album, users create a scrapbook-like travel journal that feels personal, interactive, and creative.
 
@@ -39,6 +38,7 @@ Instead of a standard photo album, users create a scrapbook-like travel journal 
 - Casual users who enjoy map-based interfaces
 - The design aims to feel warm, friendly, and scrapbook-like—not corporate or sterile.
 
+
 **🛠️ Tech Stack**
 Libraries
 - Leaflet.js – Map UI + events
@@ -48,6 +48,7 @@ Browser APIs
 - localStorage – Persist postcard objects & pin positions
 - URL.createObjectURL() – (Planned) Handle user image uploads
 
+
 **🗃️ Data Storage**
 WanderBoard uses the browser’s localStorage to save:
 - Pin coordinates
@@ -55,15 +56,19 @@ WanderBoard uses the browser’s localStorage to save:
 - Map state (optional stretch)
 - A .json export/import system will allow users to save or restore their memory board.
 
+
 **🎨 Style Guide**
+
 Colors
 - Sand Beige #F8EBD8
 - Deep Ocean Blue #264653
 - Postcard Red #C44536
 - Forest Green #2A9D8F
+
 Typography
 - Headings: Serif — Georgia, Cormorant Garamond
 - Body: Sans-serif — Inter, Roboto
+
 UI Elements
 - Rounded card edges
 - Paper textures
