@@ -104,3 +104,102 @@ nav button:hover {
   border-radius: 8px;
   margin-top: 10px;
 }
+
+/* ---------- Gallery styles ---------- */
+#postcardList {
+  padding: 1rem;
+}
+
+/* grid wrapper used by gallery.js */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+/* single card */
+.gallery-card {
+  background: white;
+  border-radius: 12px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.gallery-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+}
+
+.gallery-thumb-wrap {
+  width: 100%;
+  height: 140px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #f6f2ea, #efe6d6);
+}
+
+.gallery-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* text area */
+.gallery-title {
+  margin: 0.75rem 1rem 0.25rem;
+  font-size: 1rem;
+  color: #264653;
+  font-weight: 600;
+}
+
+.gallery-date {
+  margin: 0 1rem 0.75rem;
+  font-size: 0.85rem;
+  color: #6b7b7b;
+}
+
+/* actions row */
+.gallery-actions {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem 1rem;
+  margin-top: auto;
+}
+
+/* tiny buttons */
+.btn.small {
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: #264653;
+  color: #fff;
+}
+
+.btn.small:hover {
+  background: #1f3f43;
+}
+
+.btn.small.danger {
+  background: #C44536;
+}
+
+.btn.small.danger:hover {
+  background: #a63a2f;
+}
+
+.gallery-empty {
+  padding: 2rem;
+  background: rgba(255,255,255,0.7);
+  border-radius: 10px;
+  color: #264653;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+}
+
