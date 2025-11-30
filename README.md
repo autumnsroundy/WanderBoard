@@ -1,35 +1,35 @@
 **🗺️ WanderBoard**
 
-A Digital Postcard Map for Travel Memories:
-WanderBoard is an interactive web application that lets users drop pins on a world map and attach “digital postcards” containing notes, photos, and travel memories. The app stores data locally so users can build a personal travel journal that persists across browser sessions.
-
-This project is built for WDD II and demonstrates skills in multi-view UI design, state management, API consumption, and interactive map rendering.
+WanderBoard is an interactive web application that lets users drop pins anywhere on a world map and attach “digital postcards” with titles, notes, and optional images.
+All data is saved automatically using localStorage, creating a personal travel journal that persists across browser sessions.
+This project was built for WDD II and demonstrates state management, multi-view UI design, map rendering, and interactive user input.
 
 **🌟 Features (Planned + Completed)**
 
 **✅ Current Features**
-- Interactive world map using Leaflet.js
+- Interactive world map built with Leaflet.js
 - Drop pins by clicking anywhere on the map
-- Pins automatically save to localStorage
-- Map state persists between sessions
-- Simple navigation between Map View and Gallery View
-
-**🔧 In Development**
-- Postcard modal UI
-- Image upload using URL.createObjectURL()
-- Editable notes tied to individual pins
-- Postcard gallery view
-- Export / import travel board to .json
-- Scrapbook-inspired UI styling + animations
+- Pins save automatically to localStorage
+- Persistent postcard data (title, notes, image)
+- Postcard modal for creating/editing memories
+- Image upload support with preview
+- Gallery View showing all postcards in a responsive card layout
+- Delete functionality for removing postcards and pins
+- Navigation between Map and Gallery with active styling
+- Warm, scrapbook-inspired theme + responsive layout
 
 **🎯 Purpose**
-WanderBoard allows users to visually document places they’ve visited by attaching memories to locations on a map. Instead of using a typical photo album, users can create a creative scrapbook-like travel journal.
+WanderBoard allows users to visually document places they’ve traveled by attaching memories directly to locations on a world map.
+Instead of a standard photo album, users create a scrapbook-like travel journal that feels personal, interactive, and creative.
 
 **This project demonstrates:**
 - Multi-view, state-driven UI
-- Local data storage + retrieval
+- Persistent local browser storage / retrieval 
 - Working with a map rendering library
+- Modular JavaScript structure
+- External API usage (Leaflet + OSM)
 - Basic animations and styled components
+- CSS-based UI animations and styling
 - Optional work with third-party APIs
 
 **👤 Target Audience**
