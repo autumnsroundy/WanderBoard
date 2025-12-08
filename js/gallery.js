@@ -1,19 +1,12 @@
 import { openPostcardForPin } from "./postcards.js";
 
-/**
- * Render the gallery view.
- * Reads postcards from localStorage (object keyed by id), converts to array,
- * and renders a responsive grid. Clicking a card opens the postcard modal.
- */
-
 const galleryContainer = document.getElementById("postcardList");
 
 function readPostcards() {
   const raw = localStorage.getItem("postcards") || "{}";
   try {
     const obj = JSON.parse(raw);
-    // convert to array sorted by newest first (id is a timestamp when created)
-    return Object.values(obj).sort((a, b) => (b.id - a.id));
+    return Object.values(obj).sort((a, b) => b.id - a.id);
   } catch (e) {
     console.error("Failed to parse postcards from localStorage", e);
     return [];
@@ -21,7 +14,6 @@ function readPostcards() {
 }
 
 function formatDateFromId(id) {
-  // If id is a timestamp, show readable date. Fallback to empty string.
   const n = Number(id);
   if (!isNaN(n) && n > 1000) return new Date(n).toLocaleString();
   return "";
@@ -37,8 +29,9 @@ function createCardElement(pc) {
 
   const thumb = document.createElement("img");
   thumb.className = "gallery-thumb";
-  // fallback placeholder if no image
-  thumb.src = pc.imageUrl || "assets/placeholder-card.png";
+
+  // FIXED: postcards.js uses pc.image, not imageUrl
+  thumb.src = pc.image || "assets/placeholder-card.png";
   thumb.alt = pc.title || "Postcard image";
 
   imgWrap.appendChild(thumb);
@@ -78,7 +71,7 @@ function createCardElement(pc) {
   card.appendChild(date);
   card.appendChild(actions);
 
-  // clicking the card also opens
+  // Click anywhere on card = open postcard
   card.addEventListener("click", () => openPostcardForPin(pc.id));
 
   return card;
@@ -88,32 +81,22 @@ function handleDelete(id) {
   const ok = confirm("Delete this postcard and its pin? This cannot be undone.");
   if (!ok) return;
 
-  // remove postcard entry
-  const rawPost = localStorage.getItem("postcards") || "{}";
-  let mapPost = {};
-  try {
-    mapPost = JSON.parse(rawPost);
-  } catch (e) {
-    mapPost = {};
-  }
+  // delete postcard
+  const raw = localStorage.getItem("postcards") || "{}";
+  const mapPost = JSON.parse(raw);
   delete mapPost[id];
   localStorage.setItem("postcards", JSON.stringify(mapPost));
 
-  // remove pin entry
+  // delete pin
   const rawPins = localStorage.getItem("pins") || "[]";
-  let pins = [];
-  try {
-    pins = JSON.parse(rawPins);
-  } catch (e) {
-    pins = [];
-  }
+  let pins = JSON.parse(rawPins);
   pins = pins.filter(p => String(p.id) !== String(id));
   localStorage.setItem("pins", JSON.stringify(pins));
 
-  // Simple approach: refresh gallery and reload map view (so map markers reflect deletion)
+  // refresh gallery
   renderGallery();
-  // If map is visible, reload the page so map module re-reads localStorage.
-  // This keeps code simple without requiring extra exports from map.js.
+
+  // if map is visible, refresh markers
   if (!document.getElementById("mapView").classList.contains("hidden")) {
     location.reload();
   }

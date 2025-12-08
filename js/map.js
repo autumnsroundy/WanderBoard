@@ -1,5 +1,4 @@
-// map.js
-import { openPostcardForPin } from "./postcards.js";
+import { openPostcardForPin, createEmptyPostcard } from "./postcards.js";
 
 // Initialize Leaflet map
 export const map = L.map('map').setView([20, 0], 2);
@@ -13,6 +12,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 let savedPins = JSON.parse(localStorage.getItem("pins")) || [];
 
 export function renderPins() {
+    // clear map markers first (optional if you want to re-render)
     savedPins.forEach(pin => {
         const marker = L.marker(pin.coords).addTo(map);
         marker._leaflet_id = pin.id; // assign ID for postcard linking
@@ -29,6 +29,7 @@ map.on("click", (e) => {
     marker._leaflet_id = id;
     marker.on("click", () => openPostcardForPin(id));
 
+    // update savedPins array & localStorage
     savedPins.push({ id, coords });
     localStorage.setItem("pins", JSON.stringify(savedPins));
 

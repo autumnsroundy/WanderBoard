@@ -1,0 +1,26 @@
+{
+  "name": "wanderboard",
+  "version": "1.0.0",
+  "description": "**🗺️ WanderBoard**",
+  "main": "index.js",
+"scripts": {
+  "dev": "vite",
+  "build": "vite build",
+  "preview": "vite preview"
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/autumnsroundy/https---github.com-autumnsroundy-wanderBoard.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/autumnsroundy/https---github.com-autumnsroundy-wanderBoard/issues"
+  },
+  "homepage": "https://github.com/autumnsroundy/https---github.com-autumnsroundy-wanderBoard#readme",
+  "devDependencies": {
+    "vite": "^7.2.7"
+  }
+}
