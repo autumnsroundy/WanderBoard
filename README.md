@@ -1,4 +1,4 @@
-**🗺️ WanderBoard**
+## 🗺️ WanderBoard
 
 WanderBoard is an interactive web application that lets users drop pins anywhere on a world map and attach “digital postcards” with titles, notes, and optional images.
 All data is saved automatically using localStorage, creating a personal travel journal that persists across browser sessions.
