@@ -2,7 +2,7 @@
 
 WanderBoard is an interactive web application that lets users drop pins anywhere on a world map and attach “digital postcards” with titles, notes, and optional images.
 All data is saved automatically using localStorage, creating a personal travel journal that persists across browser sessions.
-This project was built for WDD II and demonstrates state management, multi-view UI design, map rendering, and interactive user input.
+This project was built for WDD II and demonstrates state management, multi-view UI design, map rendering, and interactive user input. This project was built over the course of approximately **30 hours**, focusing on interactive front-end functionality, client-side data persistence, and dynamic DOM manipulation.
 
 **🌟 Features**
 - Interactive world map built with Leaflet.js
@@ -56,6 +56,17 @@ WanderBoard uses the browser’s localStorage to save:
 - Map state (optional stretch)
 - A .json export/import system will allow users to save or restore their memory board.
 
+## JavaScript Implementations
+
+- **Modular ES6 code** separated into:
+  - `main.js` — Handles navigation between Map and Gallery views.  
+  - `map.js` — Leaflet map initialization, pin rendering, and click events.  
+  - `postcards.js` — Modal logic, saving postcards, image upload & compression, localStorage handling.  
+  - `gallery.js` — Dynamically rendering gallery cards, open and delete functionality.  
+- **Event handling:** Modal open/close, pin clicks, Save button, image upload.  
+- **DOM manipulation:** Gallery and modal dynamically update based on stored data.  
+- **Image handling:** Resizing and compressing images using `<canvas>` to prevent `QuotaExceededError`.  
+- **Data persistence:** All postcards and pins serialized to localStorage for cross-session persistence.
 
 **🎨 Style Guide**
 

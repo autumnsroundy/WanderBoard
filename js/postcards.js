@@ -1,109 +1,162 @@
+// postcards.js
 import { map } from "./map.js";
+import { renderGallery } from "./gallery.js";
+
+console.log("postcards.js loaded");
 
 // DOM references
 const modal = document.getElementById("postcardModal");
 const closeModalBtn = document.getElementById("closeModal");
-const titleInput = document.getElementById("pcTitle");
-const notesInput = document.getElementById("pcNotes");
 const imgInput = document.getElementById("pcImage");
 const imgPreview = document.getElementById("pcPreview");
 const saveBtn = document.getElementById("savePostcard");
 
+console.log("Save button reference:", saveBtn);
+
 let postcards = JSON.parse(localStorage.getItem("postcards")) || {};
 let activePostcardId = null;
 
-// Convert File → Base64
-function convertToBase64(file) {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = reject;
-    });
+// ----------------------
+// Image resize & compress
+// ----------------------
+function resizeImage(file, maxWidth = 800) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const reader = new FileReader();
+
+    reader.readAsDataURL(file);
+    reader.onload = () => { img.src = reader.result; };
+    reader.onerror = reject;
+
+    img.onload = () => {
+      const scale = Math.min(1, maxWidth / img.width);
+      const canvas = document.createElement("canvas");
+      canvas.width = img.width * scale;
+      canvas.height = img.height * scale;
+
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      const resizedDataUrl = canvas.toDataURL("image/jpeg", 0.7);
+      resolve(resizedDataUrl);
+    };
+
+    img.onerror = reject;
+  });
 }
 
-// Open postcard from pin
+// ----------------------
+// Open postcard modal
+// ----------------------
 export function openPostcardForPin(id) {
-    activePostcardId = id;
+  activePostcardId = id;
 
-    if (!postcards[id]) {
-        postcards[id] = {
-            id,
-            coords: findPinCoords(id),
-            title: "",
-            notes: "",
-            image: ""
-        };
-        savePostcards();
-    }
+  if (!postcards[id]) {
+    postcards[id] = {
+      id,
+      coords: findPinCoords(id),
+      title: "",
+      notes: "",
+      image: ""
+    };
+    savePostcards();
+  }
 
-    const pc = postcards[id];
-    titleInput.value = pc.title;
-    notesInput.value = pc.notes;
+  const pc = postcards[id];
 
-    if (pc.image) {
-        imgPreview.src = pc.image;
-        imgPreview.classList.remove("hidden");
-    } else {
-        imgPreview.classList.add("hidden");
-    }
+  // Populate modal inputs
+  document.getElementById("pcTitle").value = pc.title;
+  document.getElementById("pcNotes").value = pc.notes;
 
-    modal.classList.remove("hidden");
+  if (pc.image) {
+    imgPreview.src = pc.image;
+    imgPreview.classList.remove("hidden");
+  } else {
+    imgPreview.classList.add("hidden");
+  }
+
+  modal.classList.remove("hidden");
 }
 
+// ----------------------
 // Close modal
+// ----------------------
 closeModalBtn.addEventListener("click", () => {
-    modal.classList.add("hidden");
-    activePostcardId = null;
+  modal.classList.add("hidden");
+  activePostcardId = null;
 });
 
+// ----------------------
 // Image upload
+// ----------------------
 imgInput.addEventListener("change", async () => {
-    if (!activePostcardId) return;
-    const file = imgInput.files[0];
-    if (!file) return;
+  if (!activePostcardId) return;
+  const file = imgInput.files[0];
+  if (!file) return;
 
-    const base64 = await convertToBase64(file);
+  try {
+    const base64 = await resizeImage(file, 800);
     postcards[activePostcardId].image = base64;
     savePostcards();
 
     imgPreview.src = base64;
     imgPreview.classList.remove("hidden");
+  } catch (err) {
+    console.error("Failed to process image:", err);
+    alert("Failed to process image. Try a smaller file.");
+  }
 });
 
-// Save title & notes
+// ----------------------
+// Save button handler
+// ----------------------
 saveBtn.addEventListener("click", () => {
-    if (!activePostcardId) return;
+  if (!activePostcardId) return;
 
-    const pc = postcards[activePostcardId];
-    pc.title = titleInput.value;
-    pc.notes = notesInput.value;
+  const titleInput = document.getElementById("pcTitle");
+  const notesInput = document.getElementById("pcNotes");
 
-    savePostcards();
-    modal.classList.add("hidden");
-    activePostcardId = null;
+  const pc = postcards[activePostcardId];
+  pc.title = titleInput.value || "";
+  pc.notes = notesInput.value || "";
+
+  // Keep previously uploaded image
+  pc.image = pc.image || (imgPreview.src && imgPreview.src !== "" ? imgPreview.src : "");
+
+  savePostcards();
+  modal.classList.add("hidden");
+  activePostcardId = null;
+
+  // Refresh gallery immediately
+  renderGallery();
 });
 
-// Save postcards to localStorage
+// ----------------------
+// LocalStorage helpers
+// ----------------------
 function savePostcards() {
-    localStorage.setItem("postcards", JSON.stringify(postcards));
+  localStorage.setItem("postcards", JSON.stringify(postcards));
 }
 
-// Get pin coords
+// ----------------------
+// Helper: find pin coords
+// ----------------------
 function findPinCoords(id) {
-    const pins = JSON.parse(localStorage.getItem("pins")) || [];
-    const pin = pins.find(p => p.id === id);
-    return pin ? pin.coords : [0, 0];
+  const pins = JSON.parse(localStorage.getItem("pins")) || [];
+  const pin = pins.find(p => p.id === id);
+  return pin ? pin.coords : [0, 0];
 }
 
+// ----------------------
 // Create empty postcard
+// ----------------------
 export function createEmptyPostcard(id, coords) {
-    postcards[id] = {
-        id,
-        coords,
-        title: "",
-        notes: "",
-        image: ""
-    };
-    savePostcards();
+  postcards[id] = {
+    id,
+    coords,
+    title: "",
+    notes: "",
+    image: ""
+  };
+  savePostcards();
 }
